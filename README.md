@@ -84,6 +84,8 @@ Rust Backend is the main logic for taking stuff from the x11-clipboard and savin
 ### Contribution / Feedback
 Contributions and feedback are greatly appreciated! Please create a new topic/issue for them.
 
+### Uninstall
+Run `sudo dpkg -r rustybun` in terminal
 
 ### Future Work
 - Make the path for `clipboard.json` dynamic for each user.
@@ -98,5 +100,30 @@ Contributions and feedback are greatly appreciated! Please create a new topic/is
 - Error handled in line 51-65 of `backend/src/main.rs` can be handled in code line 153 (`serde_json::from_str(&json_data)`) as the JSON becomes invalid when checked here and Rust panics.
 - Give the user the option to set the cleanup limit for clipboard entries.
 
-
+#### Backend Setup
+ - Install Rust
+ - Versions:
+   - rustup 1.27.1
+   - cargo 1.78.0
+ - clone backend
+ - cargo run to check
+ - cargo build --release to get Binary file in target/release/clip_cpy
+ - the crashes in the rust part might happen due to bad formatting of JSON
+ - println!  prints to stdout in rust so the renderer.js in GUI can read it print it in our console if needed
+ - Make sure that the absolute path set in the clipboard.json and id_counter are to your username
+#### GUI setup
+ - setup electron https://www.electronjs.org/docs/latest/tutorial/tutorial-first-app
+ - setup electron builder
+ - Versions:
+   -   npm -v 10.5.2
+   -   npm -v 10.5.2
+   -   electron : ^30.0.4
+   -   electron-builder : ^24.13.3
+ -   npm run dist:linux to build .deb in dist
+ -   the copying may fail if focus is gone from the window
+ -   the need for external json is that once packaged the files become read-only, we cant change permission from inside application
+ -   the icon needs to be icns in linux too, my build path is root hence I place it there
+ -   take care to add extraFiles and icon in package.json
+ -   to trouble shoot you can run the clip_cpy and rustybun binaries after installation from /opt/rustybun
+ -   to enable console uncomment `mainWindow.webContents.openDevTools();` in main.js
 
