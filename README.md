@@ -1,81 +1,97 @@
-<svg height="85.333336" viewBox="0 0 85.333336 85.333336" width="85.333336" xmlns="http://www.w3.org/2000/svg"><g transform="matrix(.13333333 0 0 -.13333333 0 85.333333)"><path d="m640 320c0-176.73-143.27-320-320-320s-320 143.27-320 320 143.27 320 320 320 320-143.27 320-320" fill="#7db6d8"/><path d="m480 100h-320c-22.094 0-40 17.91-40 40v265 55-35-265c0-22.09 17.906-40 40-40h320c22.094 0 40 17.91 40 40v-20c0-22.09-17.906-40-40-40" fill="#6594b2"/><path d="m480 520h-320c-22.094 0-40-17.906-40-40v-55-265c0-22.09 17.906-40 40-40h320c22.094 0 40 17.91 40 40v265 55c0 22.094-17.906 40-40 40" fill="#e08e4c"/><path d="m480 140h-320v320-300h320z" fill="#b77744"/><path d="m160 160h320v320h-320z" fill="#fff"/><g fill="#e1e3cc"><path d="m420 380h-200v20h200z"/><path d="m420 340h-200v20h200z"/><path d="m420 300h-200v20h200z"/><path d="m420 260h-200v20h200z"/><path d="m420 220h-200v20h200z"/></g><path d="m400 480h-160v40h160v-30z" fill="#b77744"/><path d="m370 440h-100c-16.57 0-30 13.43-30 30v10h160v-10c0-16.57-13.43-30-30-30" fill="#d4d3d1"/><path d="m370 540h-130v-50c0-16.57 13.43-30 30-30h100c16.57 0 30 13.43 30 30v10 10 30z" fill="#495672"/></g></svg>
-![Elegantthemes-Beautiful-Flat-Clipboard](https://github.com/RiturajKulshresth/RustyBun/assets/43854753/fab4852f-8358-4d3a-b34d-ecd223cf8379)
+<div align="center">
+<img src="gui/icon.icns" width="140px" />
+# RustyBun
 
-RustyBun
-
-RustyBun is a clipboard management tool designed to streamline your workflow by providing convenient access to copied items. With RustyBun, users can easily access a history of copied text, eliminating the need to switch between multiple applications or re-copy content
+RustyBun is a clipboard management tool designed to streamline your workflow by providing convenient access to copied items. With RustyBun, users can easily access a history of copied text, eliminating the need to switch between multiple applications or re-copy content.
 
 ![image](https://github.com/RiturajKulshresth/RustyBun/assets/43854753/7c76d552-65fd-4759-bb25-60e59c7c0723)
+</div>
+## Features
+- Simple, easy-to-use, type-safe
+- Responsive layout
+- Maintains history 
+- Prevents over-usage of memory by cleaning after 200 clips
+- One-click copy 
 
-Features
-Simple, easy-to-use, Type-safe
-Responsive layout
-maintains History 
-Prevents over usage of memory by cleaning after 200 clips
-One click copy 
+## Installation
+(Currently only for Debian-based distros)
+Use the [.deb file](https://github.com/RiturajKulshresth/RustyBun/releases/tag/1.0.0) and install it on your Debian system.
 
-Installation
-(Currently only for debian based distros)
-Use the .deb file https://github.com/RiturajKulshresth/RustyBun/releases/tag/1.0.0 and install it in your debian system 
 
-Overview 
-inspired by the windows clipboard, the awesome devs of Rust, and stranger Things' Dusty Bun RustyBun aims to bring you ease of use and the ability to have multiple copied texts available to you at one click 
 
-The structure consists of two parts 
-Rust Backend and Electron GUI 
+## Overview 
 
-Rust Backend
-Rust Backend is the main logic for taking stuff from the x11-clipboard and saving it in the clipboard.json file.I chose to save the copied text in a file as I needed the feature for sudden crash of devices so that the text copied remains. It also uses serde to handle json file.
+Inspired by the Windows clipboard, the awesome devs of Rust, and Stranger Things' Dusty Bun, RustyBun aims to bring you ease of use and the ability to have multiple copied texts available to you at one click. The structure consists of three parts: Rust Backend, Electron GUI, and the build folder.
 
-The code consists of the following parts in main.js
+### 1. Rust Backend
 
-main : the execution starts here
-it checks if the folder /home/ritu/Documents/RustyBun is present or not. if not it creates this folder.
-initializes the clipboard
-runs an infinite loop in which it takes the current copied selection and calls the append_to_json to 
-post this it also checks if the json created i svalid. if its not it simoply cleares the clipboard.json and increments the counter
+Rust Backend is the main logic for taking stuff from the x11-clipboard and saving it in the `clipboard.json` file. I chose to save the copied text in a file as I needed the feature for sudden crashes of devices so that the copied text remains. It also uses serde to handle JSON files.
 
-load_id_counter : it takes the latest id of the entry in the json. this is used to keep track of the number of entries done to the clipboard. when the counter reaches 200 the json is purged on the next start of the application  and a fresh clipboard is given.
-save_id_counter : it saves teh latest id in the id_counter.txt file if the file does not exist it creates the file and then puts the value else it removes the data from the file and enters the latest value.
-append_to_json : this is the most importasnt function of the rust part of code.
-it checkas if the clipboard is present in the location /home/<user>/Documents/RustyBun/clipboard.json as absolute path. If it is not present it creates teh file and puts an empty json.
-it then opens the file and parses it to convert it to json (code needs change here)
-It creates a new entry from th evalue recieved by it from main function and parses the new json after appending the new value to teh old json
-and then clears the file to write the new json 
+#### Parts in `main.rs`
 
-Electron Gui
-its a standard electron app which reads the file in the main.js itself and sends data to the aminWindow renderer and if there is any change in the file then also sends theat data.
-It also tries to hide the menu with unnecesay features.
-if we try to read the clipboard in renderer if rails to read due to some issue 
+- **main:** 
+  - The execution starts here. 
+  - It checks if the folder `/home/ritu/Documents/RustyBun` is present or not. If not, it creates this folder. 
+  - It initializes the clipboard, runs an infinite loop to track clipboard changes, and handles appending data to `clipboard.json`. 
+  - It also checks if the created JSON is valid. If it's not, it simply clears the `clipboard.json` and increments the counter.
 
-Styler.css handles all the syling details 
+- **load_id_counter:** 
+  - It takes the latest ID of the entry in the JSON. 
+  - This is used to keep track of the number of entries done to the clipboard. 
+  - When the counter reaches 200, the JSON is purged on the next start of the application, and a fresh clipboard is given.
 
-in the renderer first we try to run the bunary file that is generated by building the rust part as a spawn which uses a new thread apparantly. and whenver there is any console changes prints the console ofg the program 
-ipcRenderer renders the gui boxes based on the clipboard.json data provided.
+- **save_id_counter:** 
+  - It saves the latest ID in the `id_counter.txt` file. 
+  - If the file does not exist, it creates the file and then puts the value. 
+  - Else, it removes the data from the file and enters the latest value.
 
-whenever the mouse is near the top of the menu it unhides teh menu
-renderJSON renders the basic window and the boxes
- Loops through each object in the JSON data in reverse order
- creates new boxes for the json and re sends them to the DOM forcing it to re render
+- **append_to_json:** 
+  - This is the most important function of the Rust part of the code. 
+  - It checks if the clipboard is present in the location `/home/<user>/Documents/RustyBun/clipboard.json` as an absolute path. 
+  - If it is not present, it creates the file and puts an empty JSON. 
+  - It then opens the file and parses it to convert it to JSON. 
+  - It creates a new entry from the value received by it from the main function and parses the new JSON after appending the new value to the old JSON and then clears the file to write the new JSON.
 
- built folder has the build script so if you want to build the application from the repository you could simply run the ./build.sh
+### 2. Electron GUI
+
+- **main:** 
+  - It reads the file in the `main.js` itself and sends data to the mainWindow renderer and if there is any change in the file then also sends that data. 
+  - It also tries to hide the menu with unnecessary features. 
+  - If we try to read the clipboard in renderer if rails to read due to some issue.
+
+- **style.css:** 
+  - Handles all the styling details.
+
+- **renderer:** 
+  - First, we try to run the binary file that is generated by building the Rust part as a spawn which uses a new thread apparently. 
+  - Whenever there is any console changes, it prints the console of the program. 
+  - `ipcRenderer` renders the GUI boxes based on the `clipboard.json` data provided. 
+  - Whenever the mouse is near the top of the menu, it unhides the menu. 
+  - `renderJSON` renders the basic window and the boxes. 
+  - Loops through each object in the JSON data in reverse order creates new boxes for the JSON and re-sends them to the DOM forcing it to re-render.
+
+### 3. Build Folder
+
+- **build.sh:**
+  - The build folder has the build script so if you want to build the application from the repository you could simply run the `./build.sh`.
+
  
-Contributing / Feedback
-Contributions are greatly appreciated! Feedback is also welcome! You can create a new topic/Issues
+### Contribution / Feedback
+Contributions and feedback are greatly appreciated! Please create a new topic/issue for them.
 
-Future work/ 
-make The path for clipboard.json dynamic for each user.
-Handle opening of multiple instances better or altogether stop multiple instances from opening as If multiple instances are opened, the clipboard.json file is overwritten by both instances, causing invalid JSON.
-Make sure that the Full menu is not visible at the startup.
-make sure that the Zoom features do work.
 
-Add an option to start the program at startup.
-Consider removing id_counter.txt as it does not serve a lot of purpose (if I can read the latest ID in the JSON).
-Add a preference menu to change the color scheme.
-Add a clear option to the clipboard.
-Add a clear option to each entry/box.
-Error handled in line 51-65 of backend/src/main.rs can be handled in code line 153 (serde_json::from_str(&json_data)?) as the JSON becomes invalid when checked here and Rust panics.
-give user option to set the cleanup limit for clipboard entries
+### Future Work
+- Make the path for `clipboard.json` dynamic for each user.
+- Handle opening of multiple instances better or altogether stop multiple instances from opening. If multiple instances are opened, the `clipboard.json` file is overwritten by both instances, causing invalid JSON.
+- Make sure that the full menu is not visible at startup.
+- Make sure that the zoom features work.
+- Add an option to start the program at startup.
+- Consider removing `id_counter.txt` as it does not serve a lot of purpose (if I can read the latest ID in the JSON).
+- Add a preference menu to change the color scheme.
+- Add a clear option to the clipboard.
+- Add a clear option to each entry/box.
+- Error handled in line 51-65 of `backend/src/main.rs` can be handled in code line 153 (`serde_json::from_str(&json_data)`) as the JSON becomes invalid when checked here and Rust panics.
+- Give the user the option to set the cleanup limit for clipboard entries.
 
 
 
