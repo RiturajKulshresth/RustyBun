@@ -56,8 +56,26 @@ ipcRenderer renders the gui boxes based on the clipboard.json data provided.
 whenever the mouse is near the top of the menu it unhides teh menu
 renderJSON renders the basic window and the boxes
  Loops through each object in the JSON data in reverse order
- 
+ creates new boxes for the json and re sends them to the DOM forcing it to re render
 
+ built folder has the build script so if you want to build the application from the repository you could simply run the ./build.sh
+ 
+Contributing / Feedback
+Contributions are greatly appreciated! Feedback is also welcome! You can create a new topic/Issues
+
+Future work/ 
+make The path for clipboard.json dynamic for each user.
+Handle opening of multiple instances better or altogether stop multiple instances from opening as If multiple instances are opened, the clipboard.json file is overwritten by both instances, causing invalid JSON.
+Make sure that the Full menu is not visible at the startup.
+make sure that the Zoom features do work.
+
+Add an option to start the program at startup.
+Consider removing id_counter.txt as it does not serve a lot of purpose (if I can read the latest ID in the JSON).
+Add a preference menu to change the color scheme.
+Add a clear option to the clipboard.
+Add a clear option to each entry/box.
+Error handled in line 51-65 of backend/src/main.rs can be handled in code line 153 (serde_json::from_str(&json_data)?) as the JSON becomes invalid when checked here and Rust panics.
+give user option to set the cleanup limit for clipboard entries
 
 
 
