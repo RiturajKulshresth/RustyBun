@@ -88,6 +88,7 @@ Contributions and feedback are greatly appreciated! Please create a new topic/is
 Run `sudo dpkg -r rustybun` in terminal
 
 ### Future Work
+- Build for windows and other linux distros
 - Make the path for `clipboard.json` dynamic for each user.
 - Handle opening of multiple instances better or altogether stop multiple instances from opening. If multiple instances are opened, the `clipboard.json` file is overwritten by both instances, causing invalid JSON.
 - Make sure that the full menu is not visible at startup.
