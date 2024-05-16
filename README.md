@@ -1,8 +1,10 @@
 <div align="center">
-<img src="gui/icon.icns" width="140px" />
-# RustyBun
+<img src="gui/Clipb.svg" width="140px" />
+<div>
+  <h1>RustyBun</h1>
+</div>
 
-RustyBun is a clipboard management tool designed to streamline your workflow by providing convenient access to copied items. With RustyBun, users can easily access a history of copied text, eliminating the need to switch between multiple applications or re-copy content.
+<p>RustyBun is a clipboard management tool designed to streamline your workflow by providing convenient access to copied items. With RustyBun, users can easily access a history of copied text, eliminating the need to switch between multiple applications or re-copy content</p>
 
 ![image](https://github.com/RiturajKulshresth/RustyBun/assets/43854753/7c76d552-65fd-4759-bb25-60e59c7c0723)
 </div>
