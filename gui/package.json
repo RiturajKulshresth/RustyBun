@@ -1,0 +1,51 @@
+{
+    "name": "rustybun",
+    "version": "1.0.0",
+    "description": "RustyBun",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dist:linux": "electron-builder --linux"
+    },
+    "author": "Rituraj <riturajkulshresth@gmail.com>",
+    "license": "ISC",
+    "devDependencies": {
+        "electron": "^30.0.4",
+        "electron-builder": "^24.13.3"
+    },
+    "build": {
+        "appId": "com.klshrsth.rustybun",
+        "files": [
+            "**/*",
+            "!node_modules",
+            "!src",
+            "!dist",
+            "!*.log",
+            "!*.md",
+            "!*.yml",
+            "!*.yaml",
+            "!LICENSE",
+            "!README.*",
+            "!tsconfig.*",
+            "!package-lock.json",
+            "!*.config.js",
+            "!yarn.lock",
+            "!.*",
+            "!*.map"
+        ],
+        "linux": {
+            "target": [
+                "deb"
+            ],
+            "icon": "/home/ritu/Desktop/Projects/Rust_electron/gui/icon.icns",
+            "category": "Utility",
+            "extraFiles": [
+                {
+                    "from": "./clip_cpy",
+                    "to": "./clip_cpy"
+                }
+            ]
+        }
+    }
+}
