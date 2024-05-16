@@ -88,12 +88,13 @@ Contributions and feedback are greatly appreciated! Please create a new topic/is
 Run `sudo dpkg -r rustybun` in terminal
 
 ### Future Work
+- Use Ctrl+V or Win+V (V1.1.0)
+- Add an option to start the program at startup (V1.1.0)
 - Build for windows and other linux distros
 - Make the path for `clipboard.json` dynamic for each user.
 - Handle opening of multiple instances better or altogether stop multiple instances from opening. If multiple instances are opened, the `clipboard.json` file is overwritten by both instances, causing invalid JSON.
 - Make sure that the full menu is not visible at startup.
 - Make sure that the zoom features work.
-- Add an option to start the program at startup.
 - Consider removing `id_counter.txt` as it does not serve a lot of purpose (if I can read the latest ID in the JSON).
 - Add a preference menu to change the color scheme.
 - Add a clear option to the clipboard.
